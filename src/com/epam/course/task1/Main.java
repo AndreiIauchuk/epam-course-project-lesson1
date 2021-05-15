@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Main {
 
     /**
-     * Значение {@code int} введенного пользователем целого числа
+     * Значение {@code int} введенного пользователем целого числа.
      */
     private static int insertedNumber;
 
@@ -23,7 +23,7 @@ public class Main {
     public static void main(String[] args) {
         if (readInsertedNumber()) {
             System.out.println("Последняя цифра квадрата числа = "
-                    + defineLastNumber(insertedNumber));
+                    + calculateLastNumber(insertedNumber));
         }
     }
 
@@ -59,12 +59,12 @@ public class Main {
     }
 
     /**
-     * Определяет квадрат последней цифры целого числа.
+     * Вычисляет квадрат последней цифры целого числа.
      *
      * @param insertedNumber введенное целое число
      * @return последнюю цифру квадрата целого числа
      */
-    private static int defineLastNumber(int insertedNumber) {
+    private static int calculateLastNumber(int insertedNumber) {
         int lastDigit;
         int sqrtLastDigit;
 

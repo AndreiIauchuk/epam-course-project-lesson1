@@ -17,19 +17,19 @@ public class Main {
 
     /**
      * Значение {@code int} введенного пользователем целого числа,
-     * характеризующего год
+     * характеризующего год.
      */
     private static int insertedYear;
 
     /**
      * Значение {@code int} введенного пользователем целого числа,
-     * характеризующего номер месяца
+     * характеризующего номер месяца.
      */
     private static int insertedMonth;
 
     /**
      * Массив целых чисел {@code int}, характеризующих количество дней
-     * в каждом месяце не високосного года
+     * в каждом месяце не високосного года.
      */
     private final static int[] daysInMonth = new int[12];
 
@@ -58,37 +58,6 @@ public class Main {
                     + countDaysInMonthOfYear() + " дней");
         }
     }
-
-    /**
-     * Возвращает количество дней {@code int} в году
-     * и номере месяца, введенном пользователем
-     *
-     * @return количество дней
-     */
-    private static int countDaysInMonthOfYear() {
-        for (int monthIndex = 0; monthIndex < daysInMonth.length; monthIndex++) {
-
-            System.out.println("monthIndex = " + monthIndex);
-
-            if ((insertedMonth - 1) == monthIndex) {
-
-                if ((insertedYear % 4) != 0) { //Не високосный год
-                    return daysInMonth[monthIndex];
-                } else { //Високосный год
-
-                    if (insertedMonth != 2) { //Не является ли введенный месяц февралем
-                        return daysInMonth[monthIndex];
-                    } else {
-                        return daysInMonth[monthIndex] + 1;
-                    }
-
-                }
-            }
-        }
-
-        return -1;
-    }
-
 
     /**
      * Считывает введенное пользователем целое число {@code int},
@@ -163,6 +132,36 @@ public class Main {
             consoleScanner.close();
             return false;
         }
+    }
+
+    /**
+     * Возвращает количество дней {@code int} в году
+     * и номере месяца, введенном пользователем.
+     *
+     * @return количество дней
+     */
+    private static int countDaysInMonthOfYear() {
+        for (int monthIndex = 0; monthIndex < daysInMonth.length; monthIndex++) {
+
+            System.out.println("monthIndex = " + monthIndex);
+
+            if ((insertedMonth - 1) == monthIndex) {
+
+                if ((insertedYear % 4) != 0) { //Не високосный год
+                    return daysInMonth[monthIndex];
+                } else { //Високосный год
+
+                    if (insertedMonth != 2) { //Не является ли введенный месяц февралем
+                        return daysInMonth[monthIndex];
+                    } else {
+                        return daysInMonth[monthIndex] + 1;
+                    }
+
+                }
+            }
+        }
+
+        return -1;
     }
 
 }
