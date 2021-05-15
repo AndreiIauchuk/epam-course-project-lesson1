@@ -13,7 +13,10 @@ import java.util.Scanner;
  */
 public class Main {
 
-    static final Scanner consoleScanner = new Scanner(System.in);
+    /**
+     * Сканнер данных, введеных пользователем из консоли
+     */
+    private static final Scanner consoleScanner = new Scanner(System.in);
 
     /**
      * Значение {@code int} введенного пользователем целого числа,
