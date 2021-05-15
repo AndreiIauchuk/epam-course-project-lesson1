@@ -19,6 +19,7 @@ public class Main {
      */
     private static int insertedNumber;
 
+
     public static void main(String[] args) {
         if (readInsertedNumber()) {
             System.out.println("Последняя цифра квадрата числа = "
@@ -26,12 +27,15 @@ public class Main {
         }
     }
 
+
     /**
      * Считывает введенное пользователем целое число {@code int}.
      *
      * @return true, если пользователь ввел целое число
      */
     private static boolean readInsertedNumber() {
+        System.out.println("Введите целое число: ");
+
         Scanner consoleScanner = new Scanner(System.in);
 
         return validateInsertedNumber(consoleScanner);
@@ -64,7 +68,10 @@ public class Main {
         int lastDigit;
         int sqrtLastDigit;
 
-        //Модуль, т.к. при введенном отрицательном числе возращает последнюю цифру со знаком минус
+        /*
+         * Берется модуль, т.к. при введенном отрицательном числе
+         * возращает последнюю цифру со знаком минус
+         */
         lastDigit = Math.abs(insertedNumber % 10);
 
         sqrtLastDigit = (int) Math.pow(lastDigit, 2) % 10;
