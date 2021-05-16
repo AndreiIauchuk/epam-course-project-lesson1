@@ -45,6 +45,7 @@ public class Main {
             countEvenNumbers++;
 
             if (countEvenNumbers == 2) {
+                consoleScanner.close();
                 return true;
             }
 
@@ -55,6 +56,7 @@ public class Main {
             countEvenNumbers++;
 
             if (countEvenNumbers == 2) {
+                consoleScanner.close();
                 return true;
             }
 
@@ -63,10 +65,10 @@ public class Main {
         readInsertedNumber("D");
         if (isInsertedNumberEven()) {
             countEvenNumbers++;
-
+            consoleScanner.close();
             return countEvenNumbers == 2;
         }
-
+        consoleScanner.close();
         return false; //Среди чисел, введенных пользователем, нет двух четных чисел
     }
 
@@ -99,11 +101,6 @@ public class Main {
     private static void validateInsertedNumber(String letter) {
         if (consoleScanner.hasNextInt()) {
             insertedNumber = consoleScanner.nextInt();
-
-            if (letter.equals("D")) {
-                consoleScanner.close(); //Закрывает поток, если пользователь ввел все четыре числа
-            }
-
         } else {
             System.err.println("Введите целое число!");
             consoleScanner.nextLine();

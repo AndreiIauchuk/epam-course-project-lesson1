@@ -63,6 +63,7 @@ public class Main {
         coordinateBx = insertedCoordinate;
         readInsertedCoordinate("B", "y");
         coordinateBy = insertedCoordinate;
+        consoleScanner.close();
     }
 
     /**
@@ -88,7 +89,6 @@ public class Main {
     private static void validateInsertedCoordinate(String letter, String coordinate) {
         if (consoleScanner.hasNextDouble()) {
             insertedCoordinate = consoleScanner.nextDouble();
-
         } else {
             System.err.println("Введите число!");
             consoleScanner.nextLine();
