@@ -66,7 +66,7 @@ public class Main {
      * Считывает введенное пользователем целое число {@code int},
      * характеризующее год.
      *
-     * @return true, если пользователь ввел целое число
+     * @return true, если пользователь ввел год
      */
     private static boolean readYear() {
         System.out.println("Введите год: ");
@@ -86,7 +86,7 @@ public class Main {
             if (insertedYear > 0) {
                 return true;
             } else {
-                System.err.println("Год не может быть отрицательным числом!");
+                System.err.println("Год не может быть отрицательным числом или нулем!");
                 consoleScanner.close();
                 return false;
             }
