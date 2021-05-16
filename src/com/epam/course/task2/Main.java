@@ -53,10 +53,6 @@ public class Main {
 
     public static void main(String[] args) {
         if (readYear() && (readMonth())) {
-
-            System.out.println("insertedYear = " + insertedYear);
-            System.out.println("insertedMonth = " + insertedMonth);
-
             System.out.println("В введенном Вами году и номере месяца "
                     + countDaysInMonthOfYear() + " дней");
         }

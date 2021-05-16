@@ -32,7 +32,7 @@ public class Main {
     /**
      * Считывает введенное пользователем целое число {@code long}.
      *
-     * @return true, если пользователь ввел целое число
+     * @return true, если пользователь правильно ввел число
      */
     private static boolean readInsertedNumber() {
         System.out.println("Введите целое число: ");
@@ -46,7 +46,7 @@ public class Main {
      * Проверяет введенное пользователем целое число {@code long}.
      *
      * @param consoleScanner сканнер для считывания целого числа
-     * @return true, если пользователь ввел целое число
+     * @return true, если пользователь правильно ввел число
      */
     private static boolean validateInsertedNumber(Scanner consoleScanner) {
         if (consoleScanner.hasNextLong()) {
