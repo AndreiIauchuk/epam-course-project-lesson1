@@ -11,7 +11,6 @@ import java.util.Scanner;
  *
  * @author Иовчук Андрей
  */
-
 public class Main {
 
     /**
@@ -26,7 +25,6 @@ public class Main {
                     + calculateLastNumber(insertedNumber));
         }
     }
-
 
     /**
      * Считывает введенное пользователем целое число {@code int}.
@@ -44,6 +42,7 @@ public class Main {
     /**
      * Проверяет введенное пользователем целое число {@code int}.
      *
+     * @param consoleScanner сканнер для считывания целого числа
      * @return true, если пользователь ввел целое число
      */
     private static boolean validateInsertedNumber(Scanner consoleScanner) {

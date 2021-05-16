@@ -11,7 +11,6 @@ import java.util.Scanner;
  *
  * @author Иовчук Андрей
  */
-
 public class Main {
 
     /**
@@ -25,7 +24,7 @@ public class Main {
         //Радиус вписанной в квадрат окружности
         double diagonalLength;
 
-        //Площадь вписанного квадрата
+        //Площадь вписанного в окружность квадрата
         double insideSquareArea;
 
         if (readSquareArea()) {
@@ -57,6 +56,7 @@ public class Main {
     /**
      * Проверяет, является ли введенное пользователем число {@code double} площадью квадрата.
      *
+     * @param consoleScanner сканнер для считывания площади квадрата
      * @return true, если пользователь правильно ввел площадь квадрата
      */
     private static boolean validateInsertedSquareArea(Scanner consoleScanner) {
@@ -92,6 +92,7 @@ public class Main {
     /**
      * Вычисляет площадь {@code double} вписанного в окружность квадрата.
      *
+     * @param diagonalLength длина диагонали квадрата
      * @return площадь вписанного квадрата,равной корню
      * квадрата диагонали данного квадрата,
      * деленного на 2
@@ -104,6 +105,7 @@ public class Main {
      * Вычисляет, во сколько раз площадь вписанного в окружность квадрата
      * меньше площади внешнего квадрата.
      *
+     * @param insideSquareArea площать вписанного в окружность квадрата
      * @return во сколько раз площадь вписанного в окружность квадрата
      * меньше площади внешнего квадрата
      */
