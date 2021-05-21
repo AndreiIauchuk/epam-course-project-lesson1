@@ -2,7 +2,7 @@
  * Copyright (c) 2021. All rights reserved.
  */
 
-package com.epam.course.task10;
+package by.epamtc.iovchuk.lesson1.task10;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,11 +19,6 @@ public class Main {
      * Сканнер данных, введеных пользователем из консоли.
      */
     private static final Scanner consoleScanner = new Scanner(System.in);
-
-  /*  **
-     * Значение {@code double} введенной пользователем точки на отрезке.
-     *//*
-    private static double insertedPointOfSegment;*/
 
     /**
      * Значение {@code double} введенного пользователем начала отрезка [a,b].

@@ -2,7 +2,7 @@
  * Copyright (c) 2021. All rights reserved.
  */
 
-package com.epam.course.task9;
+package by.epamtc.iovchuk.lesson1.task9;
 
 import java.util.Scanner;
 

@@ -2,7 +2,7 @@
  * Copyright (c) 2021. All rights reserved.
  */
 
-package com.epam.course.task3;
+package by.epamtc.iovchuk.lesson1.task3;
 
 import java.util.Scanner;
 
@@ -53,31 +53,7 @@ public class Main {
 
     }
 
-    /**
-     * Проверяет, является ли введенное пользователем число {@code double} площадью квадрата.
-     *
-     * @param consoleScanner сканнер для считывания площади квадрата
-     * @return true, если пользователь правильно ввел площадь квадрата
-     */
-    private static boolean validateInsertedSquareArea(Scanner consoleScanner) {
-        if (consoleScanner.hasNextDouble()) {
-            outsideSquareArea = consoleScanner.nextDouble();
 
-            if (outsideSquareArea > 0) {
-                consoleScanner.close();
-                return true;
-            } else {
-                System.err.println("Площадь квадрата не может быть отрицательным числом!");
-                consoleScanner.close();
-                return false;
-            }
-
-        } else {
-            System.err.println("Введите целое число!");
-            consoleScanner.close();
-            return false;
-        }
-    }
 
     /**
      * Вычисляет диамерт {@code double} вписанной в квадрат окружности.
