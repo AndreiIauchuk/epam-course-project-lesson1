@@ -4,201 +4,92 @@
 
 package by.epamtc.iovchuk.lesson1.task10;
 
-import java.util.LinkedHashMap;
+import by.epamtc.iovchuk.lesson1.exception.CustomException;
+import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
+import by.epamtc.iovchuk.lesson1.scanner.NumberScanner;
+import by.epamtc.iovchuk.lesson1.task10.scanner.SegmentStepScanner;
+import by.epamtc.iovchuk.lesson1.task10.service.FunctionService;
+import by.epamtc.iovchuk.lesson1.task10.validator.SegmentPointValidator;
+import by.epamtc.iovchuk.lesson1.task10.validator.SegmentStepValidator;
+import by.epamtc.iovchuk.lesson1.validator.CustomValidator;
+
 import java.util.Map;
-import java.util.Scanner;
 
 /**
+ * Составить программу для вычисления значений функции F(x)
+ * на отрезке [а, b] с шагом h. Результат представить в виде таблицы,
+ * первый столбец которой – значения аргумента,
+ * второй - соответствующие значения функции.
+ * <blockquote><pre>
+ *     F(x) = tg(x)
+ * </pre></blockquote>
  * Класс Main.
  *
  * @author Иовчук Андрей
  */
 public class Main {
 
-    /**
-     * Сканнер данных, введеных пользователем из консоли.
-     */
-    private static final Scanner consoleScanner = new Scanner(System.in);
+    public static void main(String[] args) throws CustomException {
 
-    /**
-     * Значение {@code double} введенного пользователем начала отрезка [a,b].
-     */
-    private static double startOfSegment;
+        /*
+         * Класс-сервис для вычисления значений функции F(x) = tg(x)
+         * на отрезке [а, b] с шагом h.
+         */
+        FunctionService functionService = new FunctionService();
 
-    /**
-     * Значение {@code double} введенного пользователем конца отрезка [a,b].
-     */
-    private static double endOfSegment;
+        /*
+         * Объект класса NumberScanner для считывания
+         * из консоли точки на отрезке, введенной пользователем
+         */
+        CustomScanner segmentPointScanner = new NumberScanner();
 
-    /**
-     * Значение {@code double} введенного пользователем шага отрезка [a,b].
-     */
-    private static double insertedSegmentStep;
+        /*
+         * Объект валидатора для проверки корректности
+         * введенной точки на отрезке
+         */
+        SegmentPointValidator segmentPointValidator = new SegmentPointValidator();
 
-    /**
-     * Map<>, содержащий информацию об значении аргументов и значениях функции.
-     * <p>
-     * {@code ключ -} значение аргумента;
-     * </p>
-     * <p>
-     * {@code значение -} значение функции.
-     * </p>
-     */
-    private static final Map<Double, Double> functionValuesMap = new LinkedHashMap<>();
+        /*
+         * Объект класса SegmentStepScanner для считывания
+         * из консоли шага, введенного пользователем
+         */
+        CustomScanner segmentStepScanner = new SegmentStepScanner();
 
-    public static void main(String[] args) {
-        readSegmentPointsAndStep();
-        fillFunctionValuesMap();
-        drawTable();
+        /*
+         * Объект валидатора для проверки корректности
+         * введенного шага
+         */
+        CustomValidator segmentStepValidator = new SegmentStepValidator();
 
-    }
+        System.out.print("Введите начало отрезка [a,b]: ");
 
-    /**
-     * Считывает начало и конец отрезка [a,b].
-     */
-    private static void readSegmentPointsAndStep() {
-        readSegmentPoint("a");
-        readSegmentPoint("b");
-        readSegmentStep();
-        consoleScanner.close();
-    }
+        //Начало отрезка
+        double segmentStart = segmentPointScanner.readDouble();
 
-    /**
-     * Считывает введенную пользователем точку на отрезке {@code double}.
-     *
-     * @param letter буква-индекс точки на отрезке
-     * @return true, если пользователь правильно ввел точку на отрезке
-     */
-    private static void readSegmentPoint(String letter) {
-        System.out.println("Введите точку " + letter
-                + " на отрезке [a,b]:");
+        System.out.print("Введите конец отрезка [a,b]: ");
 
-        validateInsertedSegmentPoint(letter);
-    }
+        //Конец отрезка
+        double segmentEnd = segmentPointScanner.readDouble();
 
-    /**
-     * Проверяет, является ли введенное пользователем число
-     * {@code double} точкой на отрезке.
-     *
-     * @param letter буква-индекс проверяемой точки на отрезке
-     */
-    private static void validateInsertedSegmentPoint(String letter) {
-        if (consoleScanner.hasNextDouble()) {
-            //Введенное пользователем значение
-            double insertedValue = consoleScanner.nextDouble();
+        if (segmentPointValidator.validate(segmentStart, segmentEnd)) {
 
-            if (letter.equals("b")) {
+            //Шаг
+            double segmentStep = segmentStepScanner.readDouble();
 
-                if (insertedValue > startOfSegment) {
-                    endOfSegment = insertedValue;
-                } else {
-                    System.err.println("Значение конца отрезка должно быть больше " +
-                            "значения начала отрезка!");
-                    rescanSegmentPoint(letter);
-                }
+            if (segmentStepValidator.validate(segmentStep)) {
 
-            } else {
-                startOfSegment = insertedValue;
+                /*
+                 * Карта, содержащая информацию об значении аргументов
+                 * и соответсвующих значениях функции.
+                 */
+                Map<Double, Double> functionValuesMap
+                        = functionService.calculateFunction(segmentStart, segmentEnd, segmentStep);
+
+                functionValuesMap.forEach((value, functionValue) ->
+                        System.out.println(value + " | " + functionValue));
             }
 
-        } else {
-            System.err.println("Введите число!");
-            rescanSegmentPoint(letter);
         }
     }
 
-    /**
-     * Вызывает метод {@code readSegmentPoint(letter)}
-     * для повторной попытки ввода точки на отрезке,
-     * если пользователь вводит неверные данные.
-     *
-     * @param letter буква-индекс точки на отрезке
-     *               для повторного ввода
-     */
-    private static void rescanSegmentPoint(String letter) {
-        consoleScanner.nextLine();
-        readSegmentPoint(letter);
-    }
-
-    /**
-     * Считывает введенную пользователем шаг на отрезке {@code double}.
-     *
-     * @return true, если пользователь правильно ввел точку на отрезке
-     */
-    private static void readSegmentStep() {
-        System.out.println("Введите шаг на отрезке [a,b]:");
-
-        validateInsertedSegmentStep();
-    }
-
-    /**
-     * Проверяет, является ли введенное пользователем число
-     * {@code double} шагом на отрезке.
-     */
-
-    private static void validateInsertedSegmentStep() {
-        if (consoleScanner.hasNextDouble()) {
-            //Введенное пользователем значение
-            double insertedValue = consoleScanner.nextDouble();
-
-            if (insertedValue > 0) {
-                insertedSegmentStep = insertedValue;
-            } else {
-                System.err.println("Шаг не может быть отрицательным числом или нулем!");
-                rescanSegmentStep();
-            }
-
-        } else {
-            System.err.println("Введите число!");
-            rescanSegmentStep();
-        }
-    }
-
-    /**
-     * Вызывает метод {@code readSegmentPoint(letter)}
-     * для повторной попытки ввода шага на отрезке,
-     * если пользователь вводит неверные данные.
-     */
-    private static void rescanSegmentStep() {
-        consoleScanner.nextLine();
-        readSegmentStep();
-    }
-
-    /**
-     * Заполняет {@code functionValuesMap} значениями.
-     */
-    private static void fillFunctionValuesMap() {
-
-        for (double pointOnSegment = startOfSegment;
-             pointOnSegment <= endOfSegment;
-             pointOnSegment = pointOnSegment + insertedSegmentStep) {
-
-            functionValuesMap.put(pointOnSegment, defineFunctionValue(pointOnSegment));
-
-        }
-    }
-
-    /**
-     * Вычисляет значение функции {@code tg(x)).
-     *
-     * @param value значение аргумента
-     * @return значение функции {@code double}
-     */
-    private static double defineFunctionValue(double value) {
-        return Math.tan(value);
-    }
-
-    /**
-     * Рисует таблицу, где:
-     * <p>
-     * {@code первый слобец -} значение введенного пользователем аргумента;
-     * </p>
-     * <p>
-     * {@code второй - } значение функции.
-     * </p>
-     */
-    private static void drawTable() {
-        functionValuesMap.forEach(((value, functionValue) ->
-                System.out.println(value + " | " + functionValue)));
-    }
 }

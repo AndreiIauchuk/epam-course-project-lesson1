@@ -2,7 +2,7 @@
  * Copyright (c) 2021. All rights reserved.
  */
 
-package by.epamtc.iovchuk.lesson1.task2;
+package by.epamtc.iovchuk.lesson1.task2.service;
 
 /**
  * Класс-сервис для вычисления количества дней
@@ -37,7 +37,7 @@ public class DaysInYearMonthService {
      *
      * @return количество дней
      */
-    public int count(int year, int month) {
+    public int calculate(int year, int month) {
         for (int monthIndex = 0; monthIndex < daysInMonth.length; monthIndex++) {
 
             if ((month - 1) == monthIndex) {

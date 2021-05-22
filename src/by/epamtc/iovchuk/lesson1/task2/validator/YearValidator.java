@@ -4,18 +4,18 @@
 
 package by.epamtc.iovchuk.lesson1.task2.validator;
 
-import by.epamtc.iovchuk.lesson1.CustomValidator;
+import by.epamtc.iovchuk.lesson1.validator.CustomValidator;
 
 /**
- * Класс для проверки корректности номера года.
+ * Класс для проверки, является ли указанное число годом.
  */
 public class YearValidator extends CustomValidator {
 
     /**
-     * Проверяет, верно ли пользователь ввел год.
+     * Проверяет, является ли указанное число годом.
      *
-     * @param year год для проверки
-     * @return true, если пользователь правильно ввел год
+     * @param year число для проверки
+     * @return true, если указанное число является годом
      */
     @Override
     public boolean validate(int year) {

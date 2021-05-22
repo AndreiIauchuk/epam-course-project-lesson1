@@ -4,157 +4,67 @@
 
 package by.epamtc.iovchuk.lesson1.task6;
 
-import java.util.Scanner;
+import by.epamtc.iovchuk.lesson1.exception.CustomException;
+import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
+import by.epamtc.iovchuk.lesson1.task6.scanner.SecondScanner;
+import by.epamtc.iovchuk.lesson1.task6.service.PastTimeService;
 
 /**
+ * Идет n-я секунда суток, определить, сколько полных часов,
+ * полных минут и секунд прошло к этому моменту.
+ * <p>
  * Класс Main.
- *
+ * </p>
  * @author Иовчук Андрей
  */
 public class Main {
 
-    /**
-     * Значение {@code int} введенного пользователем целого числа,
-     * характеризующего секунду.
-     */
-    private static int insertedSecond;
+    public static void main(String[] args) throws CustomException {
 
-    /**
-     * Значение целого числа {@code short},
-     * характеризующего прошедшие часы.
-     */
-    private static short pastHours;
+        /*
+         * Объект класса SecondScanner для считывания
+         * из консоли секунды, введенной пользователем
+         */
+        CustomScanner secondScanner = new SecondScanner();
 
-    /**
-     * Значение целого числа {@code short},
-     * характеризующего прошедшие минуты.
-     */
-    private static short pastMinutes;
+        /*
+         * Объект класса-сервиса для вычисления количества пройденных
+         * часов, минут и секунд до момента указанной секунды
+         */
+        PastTimeService pastTimeService =
+                new PastTimeService();
 
-    /**
-     * Значение целого числа {@code short},
-     * характеризующего прошедшие секунды.
-     */
-    private static short pastSeconds;
+        //Введенная пользователем секунда
+        int seconds = secondScanner.readInt();
 
-    /**
-     * Количество секунд {@code int} в одних сутках.
-     */
-    private final static int secondsInOneDay = 86400;
+        /*
+         * Вычисляет количество пройденных
+         * часов, минут и секунд до момента указанной секунды
+         */
+        pastTimeService.calculatePastTime(seconds);
 
-    /**
-     * Количество секунд {@code short} в одном часе.
-     */
-    private final static short secondsInOneHour = 3600;
+        //Количество пройденных часов
+        byte pastHours = pastTimeService.getPastHours();
 
-    /**
-     * Количество секунд {@code short} в одной минуте.
-     */
-    private final static short secondsInOneMinute = 60;
+        //Количество пройденных минут
+        short pastMinutes = pastTimeService.getPastMinutes();
 
-    public static void main(String[] args) {
+        //Количество пройденных секунд
+        short pastSeconds= pastTimeService.getPastSeconds();
 
-        if (readSecond()) {
-            calculatePastTime();
-            System.out.println("К введенной Вами секунде прошло: \n"
-                    + pastHours + " часов, \n"
-                    + pastMinutes + " минут, \n"
-                    + pastSeconds + " секунд"
-            );
 
-        }
+        StringBuilder pastTimeBuilder = new StringBuilder();
+
+        pastTimeBuilder
+                .append("К моменту введенной Вами секунде прошло:\n")
+                .append(" - ").append(pastHours).append(" часов;\n")
+                .append(" - ").append(pastMinutes).append(" минут;\n")
+                .append(" - ").append(pastSeconds).append(" секунд.");
+
+        System.out.println(pastTimeBuilder.toString());
+
 
     }
 
-    /**
-     * Считывает введенное пользователем целое число {@code int},
-     * характеризующее секунду.
-     *
-     * @return true, если пользователь ввел секунду
-     */
-    private static boolean readSecond() {
-        System.out.println("Введите секунду: ");
 
-        Scanner consoleScanner = new Scanner(System.in);
-
-        return validateInsertedSecond(consoleScanner);
-    }
-
-    /**
-     * Проверяет, является ли введенное пользователем целое число {@code int} секундой.
-     *
-     * @return true, если пользователь ввел секунду
-     */
-    private static boolean validateInsertedSecond(Scanner consoleScanner) {
-        if (consoleScanner.hasNextInt()) {
-            insertedSecond = consoleScanner.nextInt();
-
-            if (insertedSecond >= 0) {
-
-                if (insertedSecond <= secondsInOneDay) {
-                    consoleScanner.close();
-                    return true;
-                } else {
-                    System.err.println("В сутках не более 86400 секунд!");
-                    consoleScanner.close();
-                    return false;
-                }
-
-            } else {
-                System.err.println("Секунда не может быть отрицательным числом!");
-                consoleScanner.close();
-                return false;
-            }
-
-        } else {
-            System.err.println("Введите целое число!");
-            consoleScanner.close();
-            return false;
-        }
-    }
-
-    /**
-     * Вычисляет количество часов, минут и секунд,
-     * пройденных к моменту введенной пользователем секунды
-     */
-    private static void calculatePastTime() {
-        short secondsAfterDefineHours;
-        short secondsAfterDefineMinutes;
-
-        secondsAfterDefineHours = definePastHours();
-        secondsAfterDefineMinutes = definePastMinutes(secondsAfterDefineHours);
-        definePastSeconds(secondsAfterDefineMinutes);
-    }
-
-    /**
-     * Вычисляет количество пройденных часов {@code short}.
-     *
-     * @return количество оставшихся секунд
-     */
-    private static short definePastHours() {
-        pastHours = (short) (insertedSecond / secondsInOneHour);
-        return (short) (insertedSecond % secondsInOneHour);
-    }
-
-    /**
-     * Вычисляет количество пройденных минут {@code short}.
-     *
-     * @param remainingSeconds количество секунд, оставшихся после вычисленного
-     *                         количества часов
-     * @return количество секунд, оставшихся  после вычисления количества минут
-     */
-    private static short definePastMinutes(short remainingSeconds) {
-        pastMinutes = (short) (remainingSeconds / secondsInOneMinute);
-        return (short) (remainingSeconds % secondsInOneMinute);
-    }
-
-    /**
-     * Вычисляет количество пройденных секунд {@code short}.
-     *
-     * @param remainingSeconds количество секунд, оставшихся после вычисленного
-     *                         количества часов и минут
-     */
-    private static void definePastSeconds(short remainingSeconds) {
-        pastSeconds = remainingSeconds;
-    }
 }

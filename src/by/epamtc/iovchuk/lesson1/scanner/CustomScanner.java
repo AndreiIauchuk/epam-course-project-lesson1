@@ -4,7 +4,7 @@
 
 package by.epamtc.iovchuk.lesson1.scanner;
 
-import by.epamtc.iovchuk.lesson1.CustomException;
+import by.epamtc.iovchuk.lesson1.exception.CustomException;
 
 /**
  * Абстрактный класс для считывания данных,
@@ -13,12 +13,36 @@ import by.epamtc.iovchuk.lesson1.CustomException;
 public abstract class CustomScanner {
 
     /**
+     * Метод для считывания целого{@code int} числа,
+     * введенного пользователем в консоль.
+     *
+     * @return введенное пользователем целое число
+     * @throws CustomException если пользователь неверно ввел число
+     */
+    public int readInt() throws CustomException {
+        return -1;
+    }
+
+    /**
      * Метод для считывания целого числа,
      * введенного пользователем в консоль.
      *
      * @return введенное пользователем целое число
+     * @throws CustomException если пользователь неверно ввел число
      */
-    public int read() throws CustomException {
+    public long readLong() throws CustomException {
         return -1;
-    };
+    }
+
+    /**
+     * Метод для считывания вещественного числа,
+     * введенного пользователем в консоль.
+     *
+     * @return введенное пользователем целое число
+     * @throws CustomException если пользователь неверно ввел число
+     */
+    public double readDouble() throws CustomException {
+        return -1;
+    }
+
 }

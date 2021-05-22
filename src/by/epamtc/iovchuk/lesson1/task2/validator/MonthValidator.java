@@ -4,18 +4,18 @@
 
 package by.epamtc.iovchuk.lesson1.task2.validator;
 
-import by.epamtc.iovchuk.lesson1.CustomValidator;
+import by.epamtc.iovchuk.lesson1.validator.CustomValidator;
 
 /**
- * Класс для проверки корректности номера месяца.
+ * Класс для проверки, является ли указанное число месяцем.
  */
 public class MonthValidator extends CustomValidator {
 
     /**
-     * Проверяет, верно ли пользователь ввел месяц.
+     * Проверяет, является ли указанное число месяцем.
      *
-     * @param month месяц для проверки
-     * @return true, если пользователь правильно ввел месяц
+     * @param month число для проверки
+     * @return true, если указанное число является месяцем
      */
     @Override
     public boolean validate(int month) {

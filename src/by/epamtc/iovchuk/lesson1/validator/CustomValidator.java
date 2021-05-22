@@ -2,11 +2,11 @@
  * Copyright (c) 2021. All rights reserved.
  */
 
-package by.epamtc.iovchuk.lesson1;
+package by.epamtc.iovchuk.lesson1.validator;
 
 /**
  * Абстрактный класс для проверки соответствия
- * введеного числа установленным правилам
+ * введеного числа установленным правилам.
  */
 public abstract class CustomValidator {
 
