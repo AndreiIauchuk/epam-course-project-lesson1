@@ -2,10 +2,10 @@
  * Copyright (c) 2021. All rights reserved.
  */
 
-package by.epamtc.iovchuk.lesson1;
+package by.epamtc.iovchuk.lesson1.exception;
 
 /**
- * Пользовательское исключение
+ * Пользовательское исключение.
  */
 public class CustomException extends Exception {
 

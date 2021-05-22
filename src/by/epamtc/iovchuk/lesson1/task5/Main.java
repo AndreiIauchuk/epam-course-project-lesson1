@@ -4,99 +4,47 @@
 
 package by.epamtc.iovchuk.lesson1.task5;
 
-import java.util.Scanner;
+import by.epamtc.iovchuk.lesson1.exception.CustomException;
+import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
+import by.epamtc.iovchuk.lesson1.scanner.NumberScanner;
+import by.epamtc.iovchuk.lesson1.task5.service.IsPerfectService;
 
 /**
+ * Составить программу, печатающую значение true, если указанное
+ * высказывание является истинным, и false — в противном случае:
+ * является ли целое число совершенным (сумма делителей равна самому числу).
+ * <p>
  * Класс Main.
+ * </p>
  *
  * @author Иовчук Андрей
  */
 public class Main {
 
-    /**
-     * Значение {@code long} введенного пользователем целого числа.
-     */
-    private static long insertedNumber;
+    public static void main(String[] args) throws CustomException {
 
-    public static void main(String[] args) {
-        //Сумма делителей числа
-        long dividersSum;
-
-        if (readInsertedNumber()) {
-            dividersSum = defineDividersSum();
-            System.out.println(isPerfectNumber(dividersSum));
-        }
-
-    }
-
-    /**
-     * Считывает введенное пользователем целое число {@code long}.
-     *
-     * @return true, если пользователь правильно ввел число
-     */
-    private static boolean readInsertedNumber() {
-        System.out.println("Введите целое число: ");
-
-        Scanner consoleScanner = new Scanner(System.in);
-
-        return validateInsertedNumber(consoleScanner);
-    }
-
-    /**
-     * Проверяет введенное пользователем целое число {@code long}.
-     *
-     * @param consoleScanner сканнер для считывания целого числа
-     * @return true, если пользователь правильно ввел число
-     */
-    private static boolean validateInsertedNumber(Scanner consoleScanner) {
-        if (consoleScanner.hasNextLong()) {
-            insertedNumber = consoleScanner.nextLong();
-            consoleScanner.close();
-            return true;
-        } else {
-            System.err.println("Введите целое число!");
-            consoleScanner.close();
-            return false;
-        }
-
-    }
-
-    /**
-     * Вычислет сумму делителей введенного пользователем числа {@code long}
-     *
-     * @return сумму делителей числа
-     */
-    private static long defineDividersSum() {
-        /*
-         * Сумма делителей введенного числа. Изначально равна единице,
-         * т.к. любое число при делении самого на себя равно единице
-         */
-        long dividersSum = 1;
+        System.out.print("Введите целое число: ");
 
         /*
-         * Максимально возможный делитель числа, равный половине
-         * указанного числа
+         * Объект класса NumberScanner для считывания
+         * из консоли числа, введенного пользователем
          */
-        long maxDivider = insertedNumber / 2;
+        CustomScanner numberScanner = new NumberScanner();
 
-        for (long divider = 2; divider <= maxDivider; divider++) {
-            if ((insertedNumber % divider) == 0) {
-                dividersSum += divider;
-            }
-        }
+        /*
+         * Объект класса-сервиса для определения, является ли
+         * число совершенным
+         */
+        IsPerfectService isPerfectService =
+                new IsPerfectService();
 
-        return dividersSum;
-    }
+        //Введенное пользователем число
+        long insertedNumber = numberScanner.readLong();
 
+        System.out.println(isPerfectService.isPerfect(insertedNumber));
 
-    /**
-     * Проверяет, является ли введенное число совершенным
-     *
-     * @param dividersSum сумма делителей введенного числа
-     * @return true, если число совершенное
-     */
-    private static boolean isPerfectNumber(long dividersSum) {
-        return (dividersSum == insertedNumber);
 
     }
+
+
 }

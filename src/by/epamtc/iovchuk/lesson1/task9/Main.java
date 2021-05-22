@@ -4,75 +4,52 @@
 
 package by.epamtc.iovchuk.lesson1.task9;
 
-import java.util.Scanner;
+import by.epamtc.iovchuk.lesson1.exception.CustomException;
+import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
+import by.epamtc.iovchuk.lesson1.task9.scanner.RadiusScanner;
+import by.epamtc.iovchuk.lesson1.task9.service.CircleService;
 
 /**
+ * Вычислить длину окружности и площадь круга одного
+ * и того же заданного радиуса R.
+ * <p>
  * Класс Main.
+ * </p>
  *
  * @author Иовчук Андрей
  */
 public class Main {
 
-    /**
-     * Сканнер данных, введеных пользователем из консоли
-     */
-    private static final Scanner consoleScanner = new Scanner(System.in);
+    public static void main(String[] args) throws CustomException {
 
-    /**
-     * Значение {@code double} введенного пользователем радиуса.
-     */
-    private static double insertedRadius;
+        /*
+         * Объект класса RadiusScanner для считывания
+         * из консоли радиуса, введенного пользователем
+         */
+        CustomScanner radiusScanner = new RadiusScanner();
 
-    public static void main(String[] args) {
-        if (readInsertedRadius()) {
-            System.out.println("Длина окружности с введенным Вами радиусом, равна "
-                    + defineCircumference());
-            System.out.println("Площадь круга с введенным Вами радиусом, равна "
-                    + defineCircleArea());
-        }
+        /*
+         * Объекта класса-сервиса для вычисления
+         * длины окружности и площади круга
+         */
+        CircleService circleService = new CircleService();
 
+        //Введенный пользователем радиус
+        double insertedRadius = radiusScanner.readDouble();
+
+        //Длина окружности
+        double circleCircumference =
+                circleService.calculateCircumference(insertedRadius);
+
+        //Площадь круга
+        double circleArea =
+                circleService.calculateCircleArea(insertedRadius);
+
+        System.out.println("Длина окружности заданного радиуса равна "
+                + circleCircumference + ".");
+
+        System.out.println("Площадь круга заданного радиуса равна "
+                + circleArea + ".");
     }
 
-    /**
-     * Считывает введенный пользователем радиус {@code double}.
-     *
-     * @return true, если пользователь правильно ввел радиус
-     */
-    private static boolean readInsertedRadius() {
-        System.out.println("Введите радиус: ");
-
-        return validateInsertedRadius();
-    }
-
-    /**
-     * Проверяет введенный пользователем радиус {@code double}.
-     *
-     * @return true, если пользователь правильно ввел радиус
-     */
-    private static boolean validateInsertedRadius() {
-        if (consoleScanner.hasNextDouble()) {
-            insertedRadius = consoleScanner.nextDouble();
-            consoleScanner.close();
-            return true;
-        } else {
-            System.err.println("Введите число!");
-            consoleScanner.nextLine();
-            readInsertedRadius();
-            return false;
-        }
-    }
-
-    /**
-     * Вычисляет длину окружности {@code double} с радиусом, введенным пользователем.
-     */
-    private static double defineCircumference() {
-        //Длина окружности равна 2πR
-        return 2 * Math.PI * insertedRadius;
-
-    }
-
-    private static double defineCircleArea() {
-        //Площадь круга равна πR²
-        return Math.PI * Math.pow(insertedRadius, 2);
-    }
 }

@@ -4,106 +4,42 @@
 
 package by.epamtc.iovchuk.lesson1.task8;
 
-import java.util.Scanner;
+import by.epamtc.iovchuk.lesson1.exception.CustomException;
+import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
+import by.epamtc.iovchuk.lesson1.scanner.NumberScanner;
+import by.epamtc.iovchuk.lesson1.task8.service.FunctionService;
 
 /**
+ * Вычислить значение функции.
+ * <p>
  * Класс Main.
+ * </p>
  *
  * @author Иовчук Андрей
  */
 public class Main {
 
-    /**
-     * Сканнер данных, введеных пользователем из консоли.
-     */
-    private static final Scanner consoleScanner = new Scanner(System.in);
+    public static void main(String[] args) throws CustomException {
 
-    /**
-     * Значение {@code double} введенного пользователем целого числа.
-     */
-    private static double insertedNumber;
+        /*
+         * Объект класса NumberScanner для считывания
+         * из консоли числа, введенного пользователем
+         */
+        CustomScanner numberScanner = new NumberScanner();
 
-    public static void main(String[] args) {
-        double functionSystemValue;
+        System.out.print("Введите значение переменной: ");
 
-        if (readInsertedNumber()) {
-            functionSystemValue = defineFunctionSystem();
-            System.out.println("Значение функции равно: " + functionSystemValue);
-        }
+        //Введенное пользователем число
+        double insertedNumber = numberScanner.readDouble();
 
-    }
+        //Объект класса-сервиса для вычисления заданной системы функций
+        FunctionService functionService = new FunctionService();
 
-    /**
-     * Считывает введенное пользователем целое число {@code double}.
-     *
-     * @return true, если пользователь правильно ввел число
-     */
-    private static boolean readInsertedNumber() {
-        System.out.println("Введите целое число: ");
+        double functionValue =
+                functionService.calculateFunctionSystem(insertedNumber);
 
-        return validateInsertedNumber();
-    }
-
-    /**
-     * Проверяет введенное пользователем целое число {@code double}.
-     *
-     * @return true, если пользователь правильно ввел число
-     */
-    private static boolean validateInsertedNumber() {
-        if (consoleScanner.hasNextDouble()) {
-            insertedNumber = consoleScanner.nextDouble();
-            consoleScanner.close();
-            return true;
-        } else {
-            System.err.println("Введите целое число!");
-            rescanNumber();
-            return false;
-        }
+        System.out.println("Значение функции равно " + functionValue);
 
     }
 
-    /**
-     * Вызывает метод {@code readInsertedNumber(letter)}
-     * для повторной попытки ввода значения x,
-     * если пользователь вводит неверные данные.
-     *
-     */
-    private static void rescanNumber() {
-        consoleScanner.nextLine();
-        readInsertedNumber();
-    }
-
-    /**
-     * Вычисляет значение системы функции {@code double}
-     *
-     * @return значение системы функции
-     */
-    private static double defineFunctionSystem() {
-        if (insertedNumber >= 3) {
-            return defineFirstFunction();
-        } else {
-            return defineSecondFunction();
-        }
-    }
-
-    /**
-     * Вычисляет значение первой функции {@code double}, если {@code x ≥ 3}
-     *
-     * @return значение первой функции
-     */
-    private static double defineFirstFunction() {
-        return
-                -(Math.pow(insertedNumber, 2)) + 3 * insertedNumber + 9;
-
-    }
-
-    /**
-     * Вычисляет значение второй функции {@code double}, если {@code x < 3}
-     *
-     * @return значение второй функции
-     */
-    private static double defineSecondFunction() {
-        return
-                1 / (Math.pow(insertedNumber, 3) - 6);
-    }
 }

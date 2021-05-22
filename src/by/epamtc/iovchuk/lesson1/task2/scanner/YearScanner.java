@@ -4,14 +4,18 @@
 
 package by.epamtc.iovchuk.lesson1.task2.scanner;
 
-import by.epamtc.iovchuk.lesson1.CustomException;
-import by.epamtc.iovchuk.lesson1.scanner.ConsoleNumberScanner;
+import by.epamtc.iovchuk.lesson1.exception.CustomException;
+import by.epamtc.iovchuk.lesson1.scanner.NumberScanner;
 import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
-import by.epamtc.iovchuk.lesson1.CustomValidator;
+import by.epamtc.iovchuk.lesson1.validator.CustomValidator;
 import by.epamtc.iovchuk.lesson1.task2.validator.YearValidator;
 
 /**
  * Класс для считывания года, введенного пользователем в консоль.
+ * <p>
+ * Использует класс {@code NumberScanner} для считывания целого числа.
+ * </p>
+ * @see NumberScanner
  */
 public class YearScanner extends CustomScanner {
 
@@ -22,14 +26,14 @@ public class YearScanner extends CustomScanner {
      * @throws CustomException если пользователь неверно ввел год
      */
     @Override
-    public int read() throws CustomException {
-        System.out.println("Введите год: ");
+    public int readInt() throws CustomException {
+        System.out.print("Введите номер года: ");
 
         /*
-         * Объект класса-оболочки ConsoleScanner для считывания
-         * из консоли целого числа, введенного пользователем
+         * Объект класса NumberScanner для считывания
+         * из консоли числа, введенного пользователем
          */
-        ConsoleNumberScanner consoleScanner = new ConsoleNumberScanner();
+        CustomScanner numberScanner = new NumberScanner();
 
         /*
          * Объект валидатора для проверки корректности
@@ -38,7 +42,7 @@ public class YearScanner extends CustomScanner {
         CustomValidator yearValidator = new YearValidator();
 
         //Введенный пользователем год
-        int insertedYear = consoleScanner.read();
+        int insertedYear = numberScanner.readInt();
 
         if (yearValidator.validate(insertedYear)) {
             return insertedYear;

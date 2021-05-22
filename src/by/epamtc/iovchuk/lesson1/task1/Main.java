@@ -4,32 +4,40 @@
 
 package by.epamtc.iovchuk.lesson1.task1;
 
-import by.epamtc.iovchuk.lesson1.scanner.ConsoleNumberScanner;
+import by.epamtc.iovchuk.lesson1.exception.CustomException;
+import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
+import by.epamtc.iovchuk.lesson1.scanner.NumberScanner;
+import by.epamtc.iovchuk.lesson1.task1.service.LastNumberSquareService;
 
 /**
+ * Написать программу, позволяющую по последней цифре числа
+ * определить последнюю цифру его квадрата.
+ * <p>
  * Класс Main.
+ * </p>
  *
  * @author Иовчук Андрей
  */
 public class Main {
 
-    public static void main(String[] args) {
-        System.out.println("Введите целое число: ");
+    public static void main(String[] args) throws CustomException {
+        System.out.print("Введите целое число: ");
 
         /*
-         * Объект класса-оболочки ConsoleScanner для считывания
-         * из консоли целого числа, введенного пользователем
+         * Объект класса NumberScanner для считывания
+         * из консоли числа, введенного пользователем
          */
-        ConsoleNumberScanner consoleScanner = new ConsoleNumberScanner();
+        CustomScanner numberScanner = new NumberScanner();
 
         /*
          * Объект класса-сервиса для вычисления последней
          * цифры квадрата числа
          */
-        LastNumberSquareService lastNumberSquareService = new LastNumberSquareService();
+        LastNumberSquareService lastNumberSquareService
+                = new LastNumberSquareService();
 
         //Введенное пользователем целое число
-        int insertedNumber = consoleScanner.read();
+        int insertedNumber = numberScanner.readInt();
 
         System.out.println("Последняя цифра квадрата числа = "
                 + lastNumberSquareService.calculate(insertedNumber));

@@ -4,90 +4,59 @@
 
 package by.epamtc.iovchuk.lesson1.task3;
 
-import java.util.Scanner;
+import by.epamtc.iovchuk.lesson1.exception.CustomException;
+import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
+import by.epamtc.iovchuk.lesson1.task3.scanner.SquareAreaScanner;
+import by.epamtc.iovchuk.lesson1.task3.service.SquareAreaService;
 
 /**
+ * Окружность вписана в квадрат заданной площади. Найти площадь квадрата, вписанного в эту
+ * окружность. Во сколько раз площадь вписанного квадрата меньше площади заданного?
+ * <p>
  * Класс Main.
+ * </p>
  *
  * @author Иовчук Андрей
  */
 public class Main {
 
-    /**
-     * Значение {@code double} введенного пользователем числа,
-     * характеризующего площадь внешнего квадрата.
-     */
-    private static double outsideSquareArea;
+    public static void main(String[] args) throws CustomException {
 
+        /*
+         * Объект класса-сервиса для вычисления
+         * площади вписанного в окружность квадрата
+         * и отношения площади вписанного квадрата к площади внешнего
+         */
+        SquareAreaService squareAreaService =
+                new SquareAreaService();
 
-    public static void main(String[] args) {
-        //Радиус вписанной в квадрат окружности
-        double diagonalLength;
+        /*
+         * Объект класса SquareAreaScanner для считывания
+         * из консоли площади квадрата, введенного пользователем
+         */
+        CustomScanner squareAreaScanner = new SquareAreaScanner();
+
+        //Площадь внешнего квадрата
+        double outsideSquareArea = squareAreaScanner.readDouble();
 
         //Площадь вписанного в окружность квадрата
-        double insideSquareArea;
+        double insideSquareArea =
+                squareAreaService.calculateInsideSquareArea(outsideSquareArea);
 
-        if (readSquareArea()) {
-            diagonalLength = defineCircleDiagonalLength();
-            insideSquareArea = defineInsideSquareArea(diagonalLength);
-            System.out.println("Площадь квадрата, вписанного в окружность, равна "
-                    + insideSquareArea);
-            System.out.println("Площадь вписанного в окружность квадрата меньше " +
-                    "площади внешнего квадрата в " + defineDiv(insideSquareArea) + " раз");
-        }
+        /*
+         * Отношение площади вписанного квадрата к
+         * площади внешнего
+         */
+        int areaDiv =
+                (int) squareAreaService.calculateDivide(insideSquareArea, outsideSquareArea);
 
-    }
+        System.out.println("Площадь квадрата, вписанного в окружность, равна "
+                + insideSquareArea);
 
-    /**
-     * Считывает введенное пользователем число {@code double},
-     * характеризующее площадь внешнего квадрата.
-     *
-     * @return true, если пользователь ввел площадь квадрата
-     */
-    private static boolean readSquareArea() {
-        System.out.println("Введите площадь внешнего квадрата: ");
-
-        Scanner consoleScanner = new Scanner(System.in);
-
-        return validateInsertedSquareArea(consoleScanner);
+        System.out.println("Площадь вписанного в окружность квадрата меньше " +
+                "площади внешнего квадрата в " + areaDiv + " раз");
 
     }
 
-
-
-    /**
-     * Вычисляет диамерт {@code double} вписанной в квадрат окружности.
-     *
-     * @return диаметр вписанной в квадрат окружности,
-     * равный длине стороны квадрата
-     */
-    private static double defineCircleDiagonalLength() {
-        return Math.sqrt(outsideSquareArea);
-    }
-
-    /**
-     * Вычисляет площадь {@code double} вписанного в окружность квадрата.
-     *
-     * @param diagonalLength длина диагонали квадрата
-     * @return площадь вписанного квадрата,равной корню
-     * квадрата диагонали данного квадрата,
-     * деленного на 2
-     */
-    private static double defineInsideSquareArea(double diagonalLength) {
-        return Math.sqrt(Math.pow(diagonalLength, 2) / 2);
-    }
-
-    /**
-     * Вычисляет, во сколько раз площадь вписанного в окружность квадрата
-     * меньше площади внешнего квадрата.
-     *
-     * @param insideSquareArea площать вписанного в окружность квадрата
-     * @return во сколько раз площадь вписанного в окружность квадрата
-     * меньше площади внешнего квадрата
-     */
-    private static double defineDiv(double insideSquareArea) {
-        return outsideSquareArea / insideSquareArea;
-
-    }
 
 }

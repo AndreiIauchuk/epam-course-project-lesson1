@@ -2,7 +2,7 @@
  * Copyright (c) 2021. All rights reserved.
  */
 
-package by.epamtc.iovchuk.lesson1.task1;
+package by.epamtc.iovchuk.lesson1.task1.service;
 
 /**
  * Класс-сервис для вычисления последней цифры
