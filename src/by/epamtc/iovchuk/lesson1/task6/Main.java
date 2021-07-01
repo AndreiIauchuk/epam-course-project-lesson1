@@ -4,10 +4,8 @@
 
 package by.epamtc.iovchuk.lesson1.task6;
 
-import by.epamtc.iovchuk.lesson1.exception.CustomException;
-import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
+import by.epamtc.iovchuk.lesson1.task6.entity.PastTime;
 import by.epamtc.iovchuk.lesson1.task6.scanner.SecondScanner;
-import by.epamtc.iovchuk.lesson1.task6.service.PastTimeService;
 
 /**
  * Идет n-я секунда суток, определить, сколько полных часов,
@@ -19,44 +17,23 @@ import by.epamtc.iovchuk.lesson1.task6.service.PastTimeService;
  */
 public class Main {
 
-    public static void main(String[] args) throws CustomException {
+    public static void main(String[] args) {
 
-        /*
-         * Объект класса SecondScanner для считывания
-         * из консоли секунды, введенной пользователем
-         */
-        CustomScanner secondScanner = new SecondScanner();
-
-        /*
-         * Объект класса-сервиса для вычисления количества пройденных
-         * часов, минут и секунд до момента указанной секунды
-         */
-        PastTimeService pastTimeService =
-                new PastTimeService();
+        SecondScanner secondScanner = new SecondScanner();
 
         //Введенная пользователем секунда
-        int seconds = secondScanner.readInt();
+        int seconds = secondScanner.readSecond();
 
-        /*
-         * Вычисляет количество пройденных
-         * часов, минут и секунд до момента указанной секунды
-         */
-        pastTimeService.calculatePastTime(seconds);
+        PastTime pastTime = new PastTime(seconds);
 
-        //Количество пройденных часов
-        byte pastHours = pastTimeService.getPastHours();
-
-        //Количество пройденных минут
-        short pastMinutes = pastTimeService.getPastMinutes();
-
-        //Количество пройденных секунд
-        short pastSeconds= pastTimeService.getPastSeconds();
-
+        byte pastHours = pastTime.getPastHours();
+        short pastMinutes = pastTime.getPastMinutes();
+        short pastSeconds = pastTime.getPastSeconds();
 
         StringBuilder pastTimeBuilder = new StringBuilder();
 
         pastTimeBuilder
-                .append("К моменту введенной Вами секунде прошло:\n")
+                .append("К моменту введенной Вами секунды прошло:\n")
                 .append(" - ").append(pastHours).append(" часов;\n")
                 .append(" - ").append(pastMinutes).append(" минут;\n")
                 .append(" - ").append(pastSeconds).append(" секунд.");

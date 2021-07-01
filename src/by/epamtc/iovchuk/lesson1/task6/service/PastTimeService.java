@@ -4,27 +4,14 @@
 
 package by.epamtc.iovchuk.lesson1.task6.service;
 
+import by.epamtc.iovchuk.lesson1.validator.Validator;
+
 public class PastTimeService {
 
     /**
-     * Количество часов,
-     * пройденных к моменту указанной секунды.
+     * Максимальное количество секунд в одних сутках.
      */
-    private byte pastHours;
-
-    /**
-     * Количество минут,
-     * пройденных к моменту указанной секунды,
-     * без учета пройденных часов.
-     */
-    private short pastMinutes;
-
-    /**
-     * Количество секунд,
-     * пройденных к моменту указанной секунды,
-     * без учета пройденных часов и минут.
-     */
-    private short pastSeconds;
+    private final static int MAX_SECONDS_IN_DAY = 86400;
 
     /**
      * Максимальное количество секунд в одном часе.
@@ -37,32 +24,36 @@ public class PastTimeService {
     private final static int MAX_SECONDS_IN_MINUTE = 60;
 
     /**
-     * Вычисляет количество часов, минут и секунд,
-     * пройденных к моменту указанной секунды.
-     */
-    public void calculatePastTime(int second) {
-
-        /*
-         * Количество секунд оставшихся после
-         * вычисленных пройденных часов
-         */
-        short secondsAfterPastHours = calculatePastHours(second);
-
-        pastSeconds = calculatePastMinutes(secondsAfterPastHours);
-    }
-
-    /**
      * Вычисляет количество часов,
      * пройденных к моменту указанной секунды.
      *
      * @param seconds количество секунд, для которых
-     *                вычисляется количество часов
+     *                вычисляется количество пройденных часов
+     * @return количество пройденных часов
+     */
+    public byte calculatePastHours(int seconds) {
+        if (!validateSeconds(seconds)) {
+            return -1;
+        }
+
+        return (byte) (seconds / MAX_SECONDS_IN_HOUR);
+    }
+
+    /**
+     * Вычисляет количество секунд,
+     * оставшихся после вычисления количества часов,
+     * пройденных к моменту указанной секунды.
+     *
+     * @param seconds количество секунд, для которых
+     *                вычисляется количество оставшихся секунд
      * @return количество оставшихся секунд
      */
-    private short calculatePastHours(int seconds) {
-        pastHours = (byte) (seconds / MAX_SECONDS_IN_HOUR);
+    public int calcRemainingSecondsAfterPastHours(int seconds) {
+        if (!validateSeconds(seconds)) {
+            return -1;
+        }
 
-        return (short) (seconds % MAX_SECONDS_IN_HOUR);
+        return seconds % MAX_SECONDS_IN_HOUR;
     }
 
     /**
@@ -70,25 +61,40 @@ public class PastTimeService {
      * пройденных к моменту указанной секунды,
      * без учета пройденных часов.
      *
-     * @param secondsAfterPastHours количество секунд, для которых
-     *                              вычисляется количество минут
+     * @param seconds количество секунд, для которых
+     *                вычисляется количество пройденных минут
+     * @return количество пройденных минут
+     */
+    public short calculatePastMinutes(int seconds) {
+        if (!validateSeconds(seconds)) {
+            return -1;
+        }
+
+        return (short) (seconds / MAX_SECONDS_IN_MINUTE);
+    }
+
+    /**
+     * Вычисляет количество секунд,
+     * оставшихся после вычисления количества минут,
+     * пройденных к моменту указанной секунды.
+     *
+     * @param seconds количество секунд, для которых
+     *                вычисляется количество оставшихся секунд
      * @return количество оставшихся секунд
      */
-    private short calculatePastMinutes(short secondsAfterPastHours) {
-        pastMinutes = (short) (secondsAfterPastHours / MAX_SECONDS_IN_MINUTE);
+    public int calcRemainingSecondsAfterPastMinutes(int seconds) {
+        if (!validateSeconds(seconds)) {
+            return -1;
+        }
 
-        return (short) (secondsAfterPastHours % MAX_SECONDS_IN_MINUTE);
+        return seconds % MAX_SECONDS_IN_MINUTE;
     }
 
-    public byte getPastHours() {
-        return pastHours;
-    }
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    private boolean validateSeconds(int seconds) {
+        Validator validator = new Validator();
 
-    public short getPastMinutes() {
-        return pastMinutes;
-    }
-
-    public short getPastSeconds() {
-        return pastSeconds;
+        return (validator.validateOverZero(seconds)
+                && validator.validateLessOrEqualsMax(seconds, MAX_SECONDS_IN_DAY));
     }
 }

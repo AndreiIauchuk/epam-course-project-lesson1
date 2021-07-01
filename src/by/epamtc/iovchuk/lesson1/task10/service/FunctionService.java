@@ -4,6 +4,9 @@
 
 package by.epamtc.iovchuk.lesson1.task10.service;
 
+import by.epamtc.iovchuk.lesson1.exception.FirstOverLastIndexException;
+import by.epamtc.iovchuk.lesson1.validator.Validator;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,20 +21,26 @@ public class FunctionService {
      * на отрезке [а, b] с шагом h.
      *
      * @param segmentStart начало отрезка
-     * @param segmentEnd конец отрезка
-     * @param segmentStep шаг
-     * @return карту вида <Аргумент функции> -- <Значение функции>
+     * @param segmentEnd   конец отрезка
+     * @param segmentStep  шаг
+     * @return пару вида <Аргумент функции> -- <Значение функции>,
+     * либо null, если неверно указаны параметры отрезка
+     * @throws FirstOverLastIndexException если индекс начала отрезка
+     *                                     больше индекса конца отрезка
      */
-    public Map<Double, Double> calculateFunction(double segmentStart,
-                                                 double segmentEnd,
-                                                 double segmentStep) {
+    public Map<Double, Double> calculateFunction(double segmentStart, double segmentEnd, double segmentStep)
+            throws FirstOverLastIndexException {
 
-        /*
-         * Объекта класса-сервиса для вычисления
-         * длины окружности и площади круга
-         */
+        Validator validator = new Validator();
 
-        //Карта значений вида <Аргумент функции> -- <Значение функции>
+        if (!validator.validateFirstIndexLessThenLast(segmentStart, segmentEnd)) {
+            throw new FirstOverLastIndexException();
+        }
+
+        if (!validator.validateOverZero(segmentStep)) {
+           return null;
+        }
+
         Map<Double, Double> functionValuesMap = new LinkedHashMap<>();
 
         for (double segmentPoint = segmentStart;

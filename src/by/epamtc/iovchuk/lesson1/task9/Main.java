@@ -4,8 +4,6 @@
 
 package by.epamtc.iovchuk.lesson1.task9;
 
-import by.epamtc.iovchuk.lesson1.exception.CustomException;
-import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
 import by.epamtc.iovchuk.lesson1.task9.scanner.RadiusScanner;
 import by.epamtc.iovchuk.lesson1.task9.service.CircleService;
 
@@ -20,30 +18,20 @@ import by.epamtc.iovchuk.lesson1.task9.service.CircleService;
  */
 public class Main {
 
-    public static void main(String[] args) throws CustomException {
-
-        /*
-         * Объект класса RadiusScanner для считывания
-         * из консоли радиуса, введенного пользователем
-         */
-        CustomScanner radiusScanner = new RadiusScanner();
-
-        /*
-         * Объекта класса-сервиса для вычисления
-         * длины окружности и площади круга
-         */
+    public static void main(String[] args) {
+        RadiusScanner radiusScanner = new RadiusScanner();
         CircleService circleService = new CircleService();
 
         //Введенный пользователем радиус
-        double insertedRadius = radiusScanner.readDouble();
+        double insertedRadius = radiusScanner.readRadius();
 
         //Длина окружности
-        double circleCircumference =
-                circleService.calculateCircumference(insertedRadius);
+        double circleCircumference = circleService
+                .calculateCircumference(insertedRadius);
 
         //Площадь круга
-        double circleArea =
-                circleService.calculateCircleArea(insertedRadius);
+        double circleArea = circleService
+                .calculateCircleArea(insertedRadius);
 
         System.out.println("Длина окружности заданного радиуса равна "
                 + circleCircumference + ".");

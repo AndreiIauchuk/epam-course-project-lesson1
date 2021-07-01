@@ -7,8 +7,7 @@ package by.epamtc.iovchuk.lesson1.scanner;
 import java.util.Scanner;
 
 /**
- * Класс для считывания числа,
- * введенного пользователем в консоль.
+ * Класс для считывания числа, введенного пользователем в консоль.
  * <p>
  * Использует класс {@code Scanner} для считывания данных,
  * введеных в консоль.
@@ -18,7 +17,7 @@ import java.util.Scanner;
  *
  * @author Иовчук Андрей
  */
-public class NumberScanner extends CustomScanner{
+public class NumberScanner {
 
     /**
      * Сканнер для считывания данных, введеных пользователем в консоль.
@@ -30,7 +29,6 @@ public class NumberScanner extends CustomScanner{
      *
      * @return true, если пользователь ввел целое число
      */
-    @Override
     public int readInt() {
         while (!consoleScanner.hasNextInt()) {
             System.err.println("Введите целое число!");
@@ -45,7 +43,6 @@ public class NumberScanner extends CustomScanner{
      *
      * @return true, если пользователь ввел целое число
      */
-    @Override
     public long readLong() {
         while (!consoleScanner.hasNextLong()) {
             System.err.println("Введите целое число!");
@@ -60,7 +57,6 @@ public class NumberScanner extends CustomScanner{
      *
      * @return true, если пользователь ввел вещественное число
      */
-    @Override
     public double readDouble() {
         while (!consoleScanner.hasNextDouble()) {
             System.err.println("Введите вещественное число!");

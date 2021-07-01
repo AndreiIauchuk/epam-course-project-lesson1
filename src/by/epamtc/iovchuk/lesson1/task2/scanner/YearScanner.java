@@ -4,50 +4,43 @@
 
 package by.epamtc.iovchuk.lesson1.task2.scanner;
 
-import by.epamtc.iovchuk.lesson1.exception.CustomException;
 import by.epamtc.iovchuk.lesson1.scanner.NumberScanner;
-import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
-import by.epamtc.iovchuk.lesson1.validator.CustomValidator;
-import by.epamtc.iovchuk.lesson1.task2.validator.YearValidator;
+import by.epamtc.iovchuk.lesson1.validator.Validator;
 
 /**
  * Класс для считывания года, введенного пользователем в консоль.
  * <p>
  * Использует класс {@code NumberScanner} для считывания целого числа.
  * </p>
+ *
  * @see NumberScanner
  */
-public class YearScanner extends CustomScanner {
+public class YearScanner {
+
+    /**
+     * Объект класса NumberScanner для считывания
+     * из консоли числа, введенного пользователем
+     */
+    private final NumberScanner numberScanner = new NumberScanner();
 
     /**
      * Считывает год, введенный пользователем в консоль.
      *
      * @return введенный пользователем год
-     * @throws CustomException если пользователь неверно ввел год
      */
-    @Override
-    public int readInt() throws CustomException {
+    public int readYear() {
+        Validator validator = new Validator();
+
         System.out.print("Введите номер года: ");
-
-        /*
-         * Объект класса NumberScanner для считывания
-         * из консоли числа, введенного пользователем
-         */
-        CustomScanner numberScanner = new NumberScanner();
-
-        /*
-         * Объект валидатора для проверки корректности
-         * введенного года
-         * */
-        CustomValidator yearValidator = new YearValidator();
 
         //Введенный пользователем год
         int insertedYear = numberScanner.readInt();
 
-        if (yearValidator.validate(insertedYear)) {
-            return insertedYear;
-        } else {
-            throw new CustomException("Такого года не существует!");
+        while (!validator.validateOverOrEqualsZero(insertedYear)) {
+            insertedYear = readYear();
         }
+
+        return insertedYear;
     }
 }
+

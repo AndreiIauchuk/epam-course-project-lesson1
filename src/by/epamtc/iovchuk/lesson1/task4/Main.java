@@ -4,7 +4,7 @@
 
 package by.epamtc.iovchuk.lesson1.task4;
 
-import by.epamtc.iovchuk.lesson1.exception.CustomException;
+import by.epamtc.iovchuk.lesson1.task4.scanner.NumbersScanner;
 import by.epamtc.iovchuk.lesson1.task4.service.IsNumbersEvenService;
 
 /**
@@ -18,15 +18,13 @@ import by.epamtc.iovchuk.lesson1.task4.service.IsNumbersEvenService;
  */
 public class Main {
 
-    public static void main(String[] args) throws CustomException {
-        /*
-         * Класс-сервис для определения,
-         * является ли число четным
-         */
-        IsNumbersEvenService isNumbersEvenService
-                = new IsNumbersEvenService();
+    public static void main(String[] args) {
+        NumbersScanner numbersScanner = new NumbersScanner();
+        IsNumbersEvenService isNumbersEvenService = new IsNumbersEvenService();
 
-        System.out.println(isNumbersEvenService.checkInsertedNumbers());
+        int[] numbers = numbersScanner.readNumbers(4);
+
+        System.out.println(isNumbersEvenService.checkEvenNumbers(numbers, 2));
     }
 
 

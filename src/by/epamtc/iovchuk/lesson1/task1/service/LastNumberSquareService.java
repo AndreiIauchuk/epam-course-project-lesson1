@@ -11,24 +11,15 @@ package by.epamtc.iovchuk.lesson1.task1.service;
 public class LastNumberSquareService {
 
     /**
-     * Вычисляет последнюю цифру квадрата целого числа.
+     * Вычисляет последнюю цифру квадрата указанного целого числа.
      *
      * @param number целое число, для которого вычисляется
-     *               последнюю цифру квадрата
-     * @return последнюю цифру квадрата целого числа
+     *               последняя цифра квадрата
+     * @return последнюю цифру квадрата указанного целого числа
      */
     public int calculate(int number) {
-        int lastDigit;
-        int sqrtLastDigit;
-
-        /*
-         * Берется модуль, т.к. при введенном отрицательном числе
-         * возращает последнюю цифру со знаком минус
-         */
-        lastDigit = Math.abs(number % 10);
-
-        sqrtLastDigit = (int) (Math.pow(lastDigit, 2) % 10);
-
-        return sqrtLastDigit;
+        int lastDigit = number % 10;
+        return (int) (Math.pow(lastDigit, 2) % 10);
     }
+
 }

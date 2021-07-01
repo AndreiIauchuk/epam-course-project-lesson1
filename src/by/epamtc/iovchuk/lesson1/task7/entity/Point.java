@@ -4,12 +4,14 @@
 
 package by.epamtc.iovchuk.lesson1.task7.entity;
 
-import java.util.Objects;
+import java.io.Serializable;
 
 /**
  * Класс, описывающий точку на оси координат.
  */
-public class Point {
+public class Point implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Координата X точки.
@@ -37,17 +39,41 @@ public class Point {
         this.y = y;
     }
 
+    public Point() {}
+
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Point point = (Point) o;
-        return Double.compare(point.x, x) == 0 &&
-                Double.compare(point.y, y) == 0;
+        return x == point.x
+                && y == point.y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        int hashCode = 5;
+        hashCode = 31 * hashCode + (int) x;
+        hashCode = 31 * hashCode + (int) y;
+        return hashCode;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder toStringBuilder = new StringBuilder();
+
+        toStringBuilder
+                .append(getClass())
+                .append("{ ")
+                .append("x=").append(x)
+                .append(", y=").append(y)
+                .append(" }");
+
+        return toStringBuilder.toString();
     }
 }

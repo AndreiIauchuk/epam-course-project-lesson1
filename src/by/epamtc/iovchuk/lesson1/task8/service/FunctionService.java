@@ -31,8 +31,7 @@ public class FunctionService {
      */
     private double calculateFirstFunction(double number) {
         return
-                -(Math.pow(number, 2)) + 3 * number + 9;
-
+                9 - (Math.pow(number, 2)) + 3 * number;
     }
 
     /**

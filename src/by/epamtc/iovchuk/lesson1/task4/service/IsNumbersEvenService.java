@@ -4,10 +4,6 @@
 
 package by.epamtc.iovchuk.lesson1.task4.service;
 
-import by.epamtc.iovchuk.lesson1.exception.CustomException;
-import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
-import by.epamtc.iovchuk.lesson1.scanner.NumberScanner;
-
 /**
  * Класс-сервис для определения, является ли
  * число четным.
@@ -15,50 +11,32 @@ import by.epamtc.iovchuk.lesson1.scanner.NumberScanner;
 public class IsNumbersEvenService {
 
     /**
-     * Объект класса NumberScanner для считывания
-     * из консоли числа, введенного пользователем.
-     */
-    private final CustomScanner numberScanner = new NumberScanner();
-
-    /**
      * Общее количество введенных четных целых чисел.
      */
     private int countEvenNumbers;
 
     /**
-     * Проверяет, являются ли введенные пользователем числа четными.
+     * Проверяет, содержит ли указанный массив
+     * указанное количество четных чисел.
      *
-     * @return true, если хотя бы два числа четные
-     * @throws CustomException если пользователь неверно ввел одно из чисел
+     * @param numbers          массив для проверки
+     * @param evenNumbersCount количество четных чисел
+     *                         для проверки
+     * @return true, если массив содержит
+     * указанное количество четных чисел
      */
-    public boolean checkInsertedNumbers() throws CustomException {
+    public boolean checkEvenNumbers(int[] numbers, int evenNumbersCount) {
+        for (int number : numbers) {
+            if (isEven(number)) {
+                ++countEvenNumbers;
+            }
 
-        checkNextNumber("A");
-        checkNextNumber("B");
-        checkNextNumber("C");
-        checkNextNumber("D");
-
-        return countEvenNumbers >= 2;
-
-    }
-
-    /**
-     * Проверяет, является ли введенное пользователем число четным.
-     *
-     * @param letter символ-индекс вводимого числа
-     * @return true, число является четным
-     * @throws CustomException если пользователь неверно ввел число
-     */
-    private void checkNextNumber(String letter) throws CustomException {
-
-        System.out.print("Введите число " + letter + ": ");
-
-        //Введенное целое число
-        int insertedNumber = numberScanner.readInt();
-
-        if (isEven(insertedNumber)) {
-            countEvenNumbers++;
+           if (checkEvenNumbersCount(evenNumbersCount)) {
+               return true;
+           }
         }
+
+        return false;
     }
 
     /**
@@ -69,5 +47,9 @@ public class IsNumbersEvenService {
      */
     private boolean isEven(int number) {
         return (number % 2) == 0;
+    }
+
+    private boolean checkEvenNumbersCount(int evenNumbersCount) {
+        return (countEvenNumbers >= evenNumbersCount);
     }
 }

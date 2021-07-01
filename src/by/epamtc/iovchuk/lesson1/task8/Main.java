@@ -4,8 +4,6 @@
 
 package by.epamtc.iovchuk.lesson1.task8;
 
-import by.epamtc.iovchuk.lesson1.exception.CustomException;
-import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
 import by.epamtc.iovchuk.lesson1.scanner.NumberScanner;
 import by.epamtc.iovchuk.lesson1.task8.service.FunctionService;
 
@@ -19,13 +17,9 @@ import by.epamtc.iovchuk.lesson1.task8.service.FunctionService;
  */
 public class Main {
 
-    public static void main(String[] args) throws CustomException {
+    public static void main(String[] args) {
 
-        /*
-         * Объект класса NumberScanner для считывания
-         * из консоли числа, введенного пользователем
-         */
-        CustomScanner numberScanner = new NumberScanner();
+        NumberScanner numberScanner = new NumberScanner();
 
         System.out.print("Введите значение переменной: ");
 

@@ -4,15 +4,14 @@
 
 package by.epamtc.iovchuk.lesson1.task2;
 
-import by.epamtc.iovchuk.lesson1.exception.CustomException;
-import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
 import by.epamtc.iovchuk.lesson1.task2.scanner.MonthScanner;
 import by.epamtc.iovchuk.lesson1.task2.scanner.YearScanner;
-import by.epamtc.iovchuk.lesson1.task2.service.DaysInYearMonthService;
+import by.epamtc.iovchuk.lesson1.task2.service.DaysCountService;
 
 /**
- * Составить программу, которая по заданным году и номеру месяца определяет количество дней в этом
- * месяце и корректно определялись все високосные года.
+ * Составить программу, которая по заданным году и номеру месяца
+ * определяет количество дней в этом месяце и корректно
+ * определялись все високосные года.
  * <p>
  * Класс Main.
  * </p>
@@ -21,37 +20,25 @@ import by.epamtc.iovchuk.lesson1.task2.service.DaysInYearMonthService;
  */
 public class Main {
 
-    public static void main(String[] args) throws CustomException {
-        /*
-         * Класс-сервис для вычисления количества дней
-         * в году и месяце, введенных пользователем
-         */
-        DaysInYearMonthService daysInYearMonthService =
-                new DaysInYearMonthService();
+    public static void main(String[] args) {
 
-        /*
-         * Объект класса MonthScanner для считывания
-         * из консоли месяца, введенного пользователем
-         */
-        CustomScanner monthScanner = new MonthScanner();
+        DaysCountService daysCountService =
+                new DaysCountService();
 
-        /*
-         * Объект класса YearScanner для считывания
-         * из консоли года, введенного пользователем
-         */
-        CustomScanner yearScanner = new YearScanner();
+        MonthScanner monthScanner = new MonthScanner();
+        YearScanner yearScanner = new YearScanner();
 
         //Введенный пользователем месяц
-        int insertedMonth = monthScanner.readInt();
+        int insertedMonth = monthScanner.readMonth();
 
         //Введенный пользователем год
-        int insertedYear = yearScanner.readInt();
+        int insertedYear = yearScanner.readYear();
 
-        int daysInYearMonth =
-                daysInYearMonthService.calculate(insertedYear, insertedMonth);
+        int daysCount = daysCountService
+                .calculateDaysCount(insertedYear, insertedMonth);
 
         System.out.println("В введенном Вами году и месяце " +
-                daysInYearMonth + " дней");
+                daysCount + " дней");
 
     }
 

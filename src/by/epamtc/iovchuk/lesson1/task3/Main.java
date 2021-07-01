@@ -4,8 +4,6 @@
 
 package by.epamtc.iovchuk.lesson1.task3;
 
-import by.epamtc.iovchuk.lesson1.exception.CustomException;
-import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
 import by.epamtc.iovchuk.lesson1.task3.scanner.SquareAreaScanner;
 import by.epamtc.iovchuk.lesson1.task3.service.SquareAreaService;
 
@@ -20,35 +18,26 @@ import by.epamtc.iovchuk.lesson1.task3.service.SquareAreaService;
  */
 public class Main {
 
-    public static void main(String[] args) throws CustomException {
+    public static void main(String[] args) {
 
-        /*
-         * Объект класса-сервиса для вычисления
-         * площади вписанного в окружность квадрата
-         * и отношения площади вписанного квадрата к площади внешнего
-         */
         SquareAreaService squareAreaService =
                 new SquareAreaService();
 
-        /*
-         * Объект класса SquareAreaScanner для считывания
-         * из консоли площади квадрата, введенного пользователем
-         */
-        CustomScanner squareAreaScanner = new SquareAreaScanner();
+        SquareAreaScanner squareAreaScanner = new SquareAreaScanner();
 
         //Площадь внешнего квадрата
-        double outsideSquareArea = squareAreaScanner.readDouble();
+        double outsideSquareArea = squareAreaScanner.readSquare();
 
         //Площадь вписанного в окружность квадрата
-        double insideSquareArea =
-                squareAreaService.calculateInsideSquareArea(outsideSquareArea);
+        double insideSquareArea = squareAreaService
+                .calculateInsideSquareArea(outsideSquareArea);
 
         /*
          * Отношение площади вписанного квадрата к
          * площади внешнего
          */
-        int areaDiv =
-                (int) squareAreaService.calculateDivide(insideSquareArea, outsideSquareArea);
+        int areaDiv = squareAreaService
+                .calculateDivide(insideSquareArea, outsideSquareArea);
 
         System.out.println("Площадь квадрата, вписанного в окружность, равна "
                 + insideSquareArea);

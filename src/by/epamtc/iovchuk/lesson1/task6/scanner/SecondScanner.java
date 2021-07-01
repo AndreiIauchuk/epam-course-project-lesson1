@@ -4,11 +4,8 @@
 
 package by.epamtc.iovchuk.lesson1.task6.scanner;
 
-import by.epamtc.iovchuk.lesson1.exception.CustomException;
-import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
 import by.epamtc.iovchuk.lesson1.scanner.NumberScanner;
-import by.epamtc.iovchuk.lesson1.task6.validator.SecondValidator;
-import by.epamtc.iovchuk.lesson1.validator.CustomValidator;
+import by.epamtc.iovchuk.lesson1.validator.Validator;
 
 /**
  * Класс для считывания секунды, введенной пользователем в консоль.
@@ -18,37 +15,27 @@ import by.epamtc.iovchuk.lesson1.validator.CustomValidator;
  *
  * @see NumberScanner
  */
-public class SecondScanner extends CustomScanner {
+public class SecondScanner {
 
     /**
      * Считывает секунду, введенную пользователем в консоль.
      *
      * @return введеннуя пользователем секунду
-     * @throws CustomException если пользователь неверно ввел секунду
      */
-    @Override
-    public int readInt() throws CustomException {
+    public int readSecond() {
         System.out.print("Введите секунду: ");
 
-        /*
-         * Объект класса NumberScanner для считывания
-         * из консоли числа, введенного пользователем
-         */
-        CustomScanner numberScanner = new NumberScanner();
-
-        /*
-         * Объект валидатора для проверки корректности
-         * введенного месяца
-         * */
-        CustomValidator secondValidator = new SecondValidator();
+        NumberScanner numberScanner = new NumberScanner();
+        Validator validator = new Validator();
 
         //Введенная пользователем секунда
         int insertedSecond = numberScanner.readInt();
 
-        if (secondValidator.validate(insertedSecond)) {
-            return insertedSecond;
-        } else {
-            throw new CustomException("Введенное число не является секундой!");
+        while (!validator.validateOverZero(insertedSecond)) {
+            insertedSecond = readSecond();
         }
+
+        return insertedSecond;
+
     }
 }

@@ -4,8 +4,6 @@
 
 package by.epamtc.iovchuk.lesson1.task5;
 
-import by.epamtc.iovchuk.lesson1.exception.CustomException;
-import by.epamtc.iovchuk.lesson1.scanner.CustomScanner;
 import by.epamtc.iovchuk.lesson1.scanner.NumberScanner;
 import by.epamtc.iovchuk.lesson1.task5.service.IsPerfectService;
 
@@ -21,20 +19,12 @@ import by.epamtc.iovchuk.lesson1.task5.service.IsPerfectService;
  */
 public class Main {
 
-    public static void main(String[] args) throws CustomException {
+    public static void main(String[] args) {
 
         System.out.print("Введите целое число: ");
 
-        /*
-         * Объект класса NumberScanner для считывания
-         * из консоли числа, введенного пользователем
-         */
-        CustomScanner numberScanner = new NumberScanner();
+        NumberScanner numberScanner = new NumberScanner();
 
-        /*
-         * Объект класса-сервиса для определения, является ли
-         * число совершенным
-         */
         IsPerfectService isPerfectService =
                 new IsPerfectService();
 
