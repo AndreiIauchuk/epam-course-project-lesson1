@@ -11,44 +11,38 @@ public class CircleServiceTest {
 
     @Test
     public void testCalculateCircumference_whenRadiusLessOrEqualsThanZero() {
+        double expected = -1;
         double radius = 0;
-        assertCalculateCircumferenceValidationFails(radius);
+        testCalculateCircumference(expected, radius);
     }
 
     @Test
     public void testCalculateCircumference() {
         double expected = 3.14;
-        assertCalculateCircumferenceEqualsExpected(expected, 0.5);
+        double radius = 0.5;
+        testCalculateCircumference(expected, radius);
     }
 
-    private void assertCalculateCircumferenceValidationFails(double radius) {
-        double expected = -1;
-        assertCalculateCircumferenceEqualsExpected(expected, radius);
-    }
-
-    private void assertCalculateCircumferenceEqualsExpected(double expected, double radius) {
+    private void testCalculateCircumference(double expected, double radius) {
         double actual = circleService.calculateCircumference(radius);
         assertEquals(expected, actual, 0.01d);
     }
 
     @Test
     public void testCalculateCircleArea_whenRadiusLessOrEqualsThanZero() {
+        double expected = -1;
         double radius = 0;
-        assertCalculateCircleAreaValidationFails(radius);
+        testCalculateCircleArea(expected, radius);
     }
 
     @Test
     public void testCalculateCircleArea() {
         double expected = 3.14;
-        assertCalculateCircleAreaEqualsExpected(expected, 1);
+        double radius = 1;
+        testCalculateCircleArea(expected, radius);
     }
 
-    private void assertCalculateCircleAreaValidationFails(double radius) {
-        double expected = -1;
-        assertCalculateCircleAreaEqualsExpected(expected, radius);
-    }
-
-    private void assertCalculateCircleAreaEqualsExpected(double expected, double radius) {
+    private void testCalculateCircleArea(double expected, double radius) {
         double actual = circleService.calculateCircleArea(radius);
         assertEquals(expected, actual, 0.01d);
     }

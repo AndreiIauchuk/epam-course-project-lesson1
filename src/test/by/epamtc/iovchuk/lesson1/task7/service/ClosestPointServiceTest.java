@@ -22,15 +22,15 @@ public class ClosestPointServiceTest {
 
     @Test
     public void testDefineClosestPoint_whenPoint1IsClosest() throws NullException {
-        assertEqualsExpected(point1, point1, point2);
+        testDefineClosestPoint(point1, point1, point2);
     }
 
     @Test
     public void testDefineClosestPoint_whenPointsAreEquidistant() throws NullException {
-        assertEqualsExpected(point1, point1, point3);
+        testDefineClosestPoint(point1, point1, point3);
     }
 
-    private void assertEqualsExpected(Point expected, Point point1, Point point2) throws NullException {
+    private void testDefineClosestPoint(Point expected, Point point1, Point point2) throws NullException {
         Point actual = closestPointService.defineClosestPoint(point1, point2);
         assertEquals(expected, actual);
     }

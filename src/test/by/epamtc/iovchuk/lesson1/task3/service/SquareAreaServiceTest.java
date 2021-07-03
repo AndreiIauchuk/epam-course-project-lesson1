@@ -11,72 +11,65 @@ public class SquareAreaServiceTest {
 
     @Test
     public void testCalculateInsideSquareArea_whenOutsideSquareAreaLessThenZero() {
+        double expected = -1;
         double outsideSquareArea = -1;
-        assertCalculateInsideSquareAreaValidationFails(outsideSquareArea);
+        testCalculateInsideSquareArea(expected, outsideSquareArea);
     }
 
     @Test
     public void testCalculateInsideSquareArea_whenAreaEqualsZero() {
+        double expected = -1;
         double outsideSquareArea = 0;
-        assertCalculateInsideSquareAreaValidationFails(outsideSquareArea);
+        testCalculateInsideSquareArea(expected, outsideSquareArea);
     }
 
     @Test
     public void testCalculateInsideSquareArea_whenAreaEqualsEight() {
-        double outsideSquareArea = 8;
         double expected = 2;
-        assertCalculateInsideSquareAreaEqualsExpected(expected, outsideSquareArea);
+        double outsideSquareArea = 8;
+        testCalculateInsideSquareArea(expected, outsideSquareArea);
     }
 
-    @Test
-    public void testCalculateDivide_whenInsideSquareAreaLessThenZero() {
-        double insideSquareArea = -1;
-        double outsideSquareArea = 1;
-        assertCalculateDivideValidationFails(insideSquareArea, outsideSquareArea);
-    }
-
-    @Test
-    public void testCalculateDivide_whenInsideSquareAreaEqualsZero() {
-        double insideSquareArea = 0;
-        double outsideSquareArea = 1;
-        assertCalculateDivideValidationFails(insideSquareArea, outsideSquareArea);
-    }
-
-    @Test
-    public void testCalculateDivide_whenOutsideSquareAreaLessThenZero() {
-        double insideSquareArea = 1;
-        double outsideSquareArea = -1;
-        assertCalculateDivideValidationFails(insideSquareArea, outsideSquareArea);
-    }
-
-    @Test
-    public void testCalculateDivide_whenOutsideSquareAreaEqualsZero() {
-        double insideSquareArea = 1;
-        double outsideSquareArea = 0;
-        assertCalculateDivideValidationFails(insideSquareArea, outsideSquareArea);
-    }
-
-    private void assertCalculateInsideSquareAreaValidationFails(double outsideSquareArea) {
-        double expected = -1;
-        assertCalculateInsideSquareAreaEqualsExpected(expected, outsideSquareArea);
-    }
-
-    private void assertCalculateInsideSquareAreaEqualsExpected(double expected,double outsideSquareArea) {
+    private void testCalculateInsideSquareArea(double expected, double outsideSquareArea) {
         double actual = squareAreaService.calculateInsideSquareArea(outsideSquareArea);
         assertEquals(expected, actual, 0.01d);
     }
 
-    private void assertCalculateDivideValidationFails(double insideSquareArea, double outsideSquareArea) {
+    @Test
+    public void testCalculateDivide_whenInsideSquareAreaLessThenZero() {
         int expected = -1;
-        assertCalculateDivideEqualsExpected(
-                expected,
-                insideSquareArea,
-                outsideSquareArea);
+        double insideSquareArea = -1;
+        double outsideSquareArea = 1;
+        testCalculateDivide(expected, insideSquareArea, outsideSquareArea);
     }
 
-    private void assertCalculateDivideEqualsExpected(int expected,
-                                                     double insideSquareArea,
-                                                     double outsideSquareArea) {
+    @Test
+    public void testCalculateDivide_whenInsideSquareAreaEqualsZero() {
+        int expected = -1;
+        double insideSquareArea = 0;
+        double outsideSquareArea = 1;
+        testCalculateDivide(expected, insideSquareArea, outsideSquareArea);
+    }
+
+    @Test
+    public void testCalculateDivide_whenOutsideSquareAreaLessThenZero() {
+        int expected = -1;
+        double insideSquareArea = 1;
+        double outsideSquareArea = -1;
+        testCalculateDivide(expected, insideSquareArea, outsideSquareArea);
+    }
+
+    @Test
+    public void testCalculateDivide_whenOutsideSquareAreaEqualsZero() {
+        int expected = -1;
+        double insideSquareArea = 1;
+        double outsideSquareArea = 0;
+        testCalculateDivide(expected, insideSquareArea, outsideSquareArea);
+    }
+
+    private void testCalculateDivide(int expected,
+                                     double insideSquareArea,
+                                     double outsideSquareArea) {
 
         int actual =  squareAreaService.calculateDivide(insideSquareArea, outsideSquareArea);
         assertEquals(expected, actual);

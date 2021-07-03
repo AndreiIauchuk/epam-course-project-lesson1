@@ -12,16 +12,16 @@ public class IsPerfectServiceTest {
     @Test
     public void testIsPerfect_whenNumberIsPerfect() {
         int perfectNumber = 6;
-        assertEqualsExpected(true, perfectNumber);
+        testIsPerfect(true, perfectNumber);
     }
 
     @Test
     public void testIsPerfect_whenNumberIsNotPerfect() {
         int notPerfectNumber = 7;
-        assertEqualsExpected(false, notPerfectNumber);
+        testIsPerfect(false, notPerfectNumber);
     }
 
-    private void assertEqualsExpected(boolean expected, int number) {
+    private void testIsPerfect(boolean expected, int number) {
         boolean actual = isPerfectService.isPerfect(number);
         assertEquals(expected, actual);
     }

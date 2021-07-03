@@ -12,17 +12,17 @@ public class IsNumbersEvenServiceTest {
     @Test
     public void testCheckEvenNumbers_whenNumbersAreEven() {
         int[] evenNumbers = {2, 8, 4, 0, 2};
-        assertEqualsExpected(true, evenNumbers, 2);
+        testCheckEvenNumbers(true, evenNumbers, 2);
     }
 
     @Test
     public void testCheckEvenNumbers_whenNumbersAreOdd() {
         int[] oddNumber = {1, 5, 3};
-        assertEqualsExpected(false, oddNumber, 3);
+        testCheckEvenNumbers(false, oddNumber, 3);
 
     }
 
-    private void assertEqualsExpected(boolean expected, int[] numbers, int evenNumberCount) {
+    private void testCheckEvenNumbers(boolean expected, int[] numbers, int evenNumberCount) {
         boolean actual = isNumbersEvenService.checkEvenNumbers(numbers, evenNumberCount);
         assertEquals(expected, actual);
     }

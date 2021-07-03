@@ -34,12 +34,6 @@ public class FunctionServiceTest {
         expected.put(1.0, 1.5574077246549023);
         expected.put(2.0, -2.185039863261519);
         expected.put(3.0, -0.1425465430742778);
-
-        assertEqualsExpected(expected);
-    }
-
-    private void assertEqualsExpected(Map<Double, Double> expected)
-            throws FirstOverLastIndexException {
         Map<Double, Double> actual = functionService.calculateFunction(segmentStart, segmentEnd, segmentStep);
         assertEquals(expected, actual);
     }

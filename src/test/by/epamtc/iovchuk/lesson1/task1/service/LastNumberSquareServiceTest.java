@@ -11,26 +11,26 @@ public class LastNumberSquareServiceTest {
 
     @Test
     public void testCalculate_whenNumberIsPositive() {
-        int number = 4;
         int expected = 6;
-        assertEqualsExpected(expected, number);
+        int number = 4;
+        testCalculate(expected, number);
     }
 
     @Test
     public void testCalculate_whenNumberIsNegative() {
-        int number = -8;
         int expected = 4;
-        assertEqualsExpected(expected, number);
+        int number = -8;
+        testCalculate(expected, number);
     }
 
     @Test
     public void testCalculate_whenNumberIsZero() {
-        int number = 0;
         int expected = 0;
-        assertEqualsExpected(expected, number);
+        int number = 0;
+        testCalculate(expected, number);
     }
 
-    private void assertEqualsExpected(int expected, int number) {
+    private void testCalculate(int expected, int number) {
         int actual = lastNumberSquareService.calculate(number);
         assertEquals(expected, actual);
     }
